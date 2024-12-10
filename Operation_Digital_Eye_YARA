@@ -1,0 +1,45 @@
+rule Operation_Digital_Eye {
+    meta:
+        description = "Detects files associated with Operation Digital Eye based on hash indicators"
+        author = "sl33pydata"
+        reference = "Operation Digital Eye"
+        date = "2024-12-10"
+        threat_actor = "Digital Eye"
+        campaign = "Tainted Love"
+        tools = "PHPsert, CreateDump, GetUserInfo, mimCN, Visual Studio Code"
+        servers = "146.70.161.78, 185.76.78.117, 20.103.221.187, 4.232.170.137"
+
+    strings:
+        // SHA-1 hashes
+        $hash1 = "0be9dd709d7d68887a92c793881dd4a010796e95" // CreateDump (do.exe)
+        $hash2 = "213f06ed5ac9e688816b4bbe73bf507994949964" // GetUserInfo
+        $hash3 = "289f3bfe297923507cf4c26ca500ae01819c6a95" // local.exe
+        $hash4 = "2e2cf8a4a0e7decceb8e22536b13173479da0d13" // PHPsert variant
+        $hash5 = "3035d8846d7a9f309f2d24daba6ac33ad99524fc" // PHPsert variant
+        $hash6 = "399776991a094e1ee78b2a915bf4491e67c04ec7" // PHPsert variant
+        $hash7 = "3a688c844259822c51ceb3aea508303c4a654eb3" // PHPsert variant
+        $hash8 = "7941909fd5c1277c6f7baf21e484c9e59ea454ee" // mimCN (bK2o.exe)
+        $hash9 = "7cb7bcb9187f8faf47fd77cf1213ab3fe2350a77" // mimCN (simplify_32.exe)
+        $hash10 = "e572380ab95c4ab5a87f701d4654d3386911b387" // do.bat
+
+        // IP addresses
+        $ip1 = "146.70.161.78"
+        $ip2 = "185.76.78.117"
+        $ip3 = "20.103.221.187"
+        $ip4 = "4.232.170.137"
+
+        // File names
+        $fn1 = "do.exe"
+        $fn2 = "local.exe"
+        $fn3 = "wsx.exe"
+        $fn4 = "simplify_32.exe"
+        $fn5 = "code.exe"
+
+    condition:
+        uint16(0) == 0x5A4D and
+        (
+            any of ($hash*) or
+            any of ($ip*) or
+            any of ($fn*)
+        )
+}
