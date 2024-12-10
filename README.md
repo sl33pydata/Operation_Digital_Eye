@@ -1,2 +1,2 @@
 # Operation_Digital_Eye
-Operation Digital Eye is a targeted cyber-espionage campaign leveraging custom tools such as PHPsert webshells, mimCN utilities and Visual Studio Code tunnels. 
+Operation Digital Eye is a targeted cyber-espionage campaign leveraging custom tools such as PHPsert webshells, mimCN utilities and Visual Studio Code tunnels. The campaign employs SQL injection for initial access, followed by credential theft, data exfiltration and lateral movement using bespoke tools like CreateDump, GetUserInfo and mim221. Command & Control (C2) activites are ovserved via specific IPs with indicators tied to both malicious payloads and infrastructure. 
